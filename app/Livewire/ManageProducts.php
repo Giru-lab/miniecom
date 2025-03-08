@@ -107,4 +107,11 @@ class ManageProducts extends Component
             'categories' => $this->categories,
         ])->layout('components.layouts.admin');
     }
+
+    public function cancelEdit()
+{
+    $this->resetForm(); // Reset form fields
+    $this->isEditing = false; // Hide the edit form
+}
+
 }

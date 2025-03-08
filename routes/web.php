@@ -12,6 +12,9 @@ use App\Http\Controllers\CategoryController;
 use App\Livewire\AdminOverview;
 use App\Http\Controllers\SuperAdminController;
 use App\Livewire\ManageProducts;
+use App\Livewire\ShowOrders;
+use App\Livewire\ShowOrder;
+
 
 
 Route::get('/', function () {
@@ -33,9 +36,10 @@ Route::middleware(['auth', 'verified','rolemanager:admin'])->group(function () {
 
     Route::get('/admin/orders', OrderManagementComponent::class)->name('admin.orders');
 
+    Route::get('/orders', ShowOrders::class)->name('orders.index');
+Route::get('/orders/{orderId}', ShowOrder::class)->name('orders.show');
+
     
-
-
 });
 
 

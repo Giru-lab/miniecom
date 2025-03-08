@@ -1,7 +1,16 @@
 <div>
     <div class="row">
         @if (session()->has('message'))
-            <p style="color: green;">{{ session('message') }}</p>
+            <div x-data="{ show: true }" x-show="show" x-transition.opacity.duration.300ms
+                class="motion-preset-pop fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
+                    <h2 class="text-xl font-semibold mb-2">Order Confirmed!</h2>
+                    <p>{{ session('message') }}</p>
+                    <button @click="show = false" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
+                        OK
+                    </button>
+                </div>
+            </div>
         @endif
 
         @if (session()->has('error'))

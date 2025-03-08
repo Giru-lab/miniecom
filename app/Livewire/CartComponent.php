@@ -13,6 +13,11 @@ class CartComponent extends Component
 
     public function mount()
     {
+        $this->loadCart();
+    }
+
+    private function loadCart()
+    {
         $this->cart = session()->get('cart', []);
         $this->calculateTotal();
     }
@@ -21,22 +26,17 @@ class CartComponent extends Component
     {
         if (isset($this->cart[$productId])) {
             unset($this->cart[$productId]);
-            session()->put('cart', $this->cart);
-            $this->calculateTotal();
-            session()->flash('message', 'Product removed from cart.');
-
+            $this->updateSession();
             $this->dispatch('cartUpdated'); // Livewire v3: Use dispatch instead of emit
         }
     }
 
     public function updateQuantity($productId, $quantity)
     {
-        if (isset($this->cart[$productId]) && $quantity > 0) {
+        if (isset($this->cart[$productId])) {
+            $quantity = max(1, (int) $quantity); // Ensure quantity is a valid positive number
             $this->cart[$productId]['quantity'] = $quantity;
-            session()->put('cart', $this->cart);
-            $this->calculateTotal();
-            session()->flash('message', 'Cart updated successfully.');
-
+            $this->updateSession();
             $this->dispatch('cartUpdated'); // Livewire v3: Use dispatch instead of emit
         }
     }
@@ -49,7 +49,6 @@ class CartComponent extends Component
         }
 
         $orderTotal = 0;
-
         foreach ($this->cart as $productId => $item) {
             $productTotal = $item['price'] * $item['quantity'];
             $orderTotal += $productTotal;
@@ -70,18 +69,26 @@ class CartComponent extends Component
         $this->total = 0;
 
         session()->flash('message', "Order placed successfully! Your total is $orderTotal.");
-        $this->dispatch('cartUpdated'); // Livewire v3: Use dispatch instead of emit
+        $this->dispatch('orderConfirmed');
+        $this->dispatch('cartUpdated');
     }
 
-    public function calculateTotal()
+    private function updateSession()
     {
-        $this->total = array_reduce($this->cart, function ($carry, $item) {
-            return $carry + ($item['price'] * $item['quantity']);
-        }, 0);
+        session()->put('cart', $this->cart);
+        $this->calculateTotal();
+    }
+
+    private function calculateTotal()
+    {
+        $this->total = array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $this->cart));
     }
 
     public function render()
     {
-        return view('livewire.cart-component', ['cart' => $this->cart, 'total' => $this->total]);
+        return view('livewire.cart-component', [
+            'cart' => $this->cart,
+            'total' => $this->total
+        ]);
     }
 }

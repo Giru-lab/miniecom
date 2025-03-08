@@ -53,4 +53,5 @@ class AddProductComponent extends Component
         return view('livewire.add-product-component')->layout('components.layouts.admin');
 
     }
+    
 }

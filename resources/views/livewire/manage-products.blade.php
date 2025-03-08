@@ -1,37 +1,38 @@
 <div>
-    <div class="com_card mx-2">
-        <h3 class="com_card_title mb-3">{{ $isEditing ? 'Edit Product' : 'Add New Product' }}</h3>
+    @if ($isEditing)
+        <div class="com_card mx-2">
+            <h3 class="com_card_title mb-3">Edit Product</h3>
 
-        <form wire:submit.prevent="{{ $isEditing ? 'updateProduct' : 'saveProduct' }}">
-            <label for="title" class="form_label">Title</label>
-            <input type="text" wire:model="title" class="form-input" />
+            <form wire:submit.prevent="updateProduct">
+                <label for="title" class="form_label">Title</label>
+                <input type="text" wire:model="title" class="form-input" />
 
-            <label for="description" class="form_label">Description</label>
-            <textarea wire:model="description" class="form-input"></textarea>
+                <label for="description" class="form_label">Description</label>
+                <textarea wire:model="description" class="form-input"></textarea>
 
-            <label for="price" class="form_label">Price</label>
-            <input type="number" wire:model="price" class="form-input" />
+                <label for="price" class="form_label">Price</label>
+                <input type="number" wire:model="price" class="form-input" />
 
-            <label for="category" class="form_label">Category</label>
-            <select wire:model="category_id" class="form-input">
-                <option value="">Select a category</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                @endforeach
-            </select>
+                <label for="category" class="form_label">Category</label>
+                <select wire:model="category_id" class="form-input">
+                    <option value="">Select a category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
 
-            <label for="image" class="form_label">Image</label>
-            <input type="file" wire:model="image" class="form-input" />
+                <label for="image" class="form_label">Image</label>
+                <input type="file" wire:model="image" class="form-input" />
 
-            <button type="submit" class="btn-one mt-3">
-                {{ $isEditing ? 'Update Product' : 'Add Product' }}
-            </button>
-        </form>
+                <button type="submit" class="btn-one mt-3">Update Product</button>
+                <button type="button" class="btn btn-secondary mt-3" wire:click="cancelEdit">Cancel</button>
+            </form>
 
-        @if (session()->has('message'))
-            <div class="alert alert-success mt-2">{{ session('message') }}</div>
-        @endif
-    </div>
+            @if (session()->has('message'))
+                <div class="alert alert-success mt-2">{{ session('message') }}</div>
+            @endif
+        </div>
+    @endif
 
     <div class="com_card mx-2">
         <h3 class="com_card_title mb-3">All Products</h3>
