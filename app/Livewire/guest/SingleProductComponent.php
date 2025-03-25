@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\guest;
 
 use Livewire\Component;
 use App\Models\Product;
@@ -71,7 +71,7 @@ class SingleProductComponent extends Component
 
     {
 
-        return view('livewire.single-product-component');
+        return view('livewire.guest.view-product');
 
     }
 }

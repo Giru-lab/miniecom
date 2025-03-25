@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\admin;
 
 use Livewire\Component;
 use App\Models\Order;
@@ -28,6 +28,6 @@ class AdminOverview extends Component
     }
     public function render()
     {
-        return view('livewire.admin-overview')->layout('components.layouts.admin');
+        return view('livewire.admin.overview')->layout('components.layouts.admin');
     }
 }

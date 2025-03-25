@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\guest;
 use App\Models\Product;
 use Livewire\Component;
 
@@ -56,7 +56,7 @@ class BrowseProductsComponent extends Component
 
     {
 
-        return view('livewire.browse-products-component', ['products' => Product::all()]);
+        return view('livewire.guest.product', ['products' => Product::all()]);
 
     }
 

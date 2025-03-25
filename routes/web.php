@@ -1,19 +1,19 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Livewire\CategoryComponent;
-use App\Livewire\AddProductComponent;
-use App\Livewire\OrderManagementComponent;
+use App\Livewire\admin\CategoryComponent;
+use App\Livewire\admin\AddProductComponent;
+use App\Livewire\admin\OrderManagementComponent;
 use Illuminate\Support\Facades\Route;
-use App\Livewire\BrowseProductsComponent;
-use App\Livewire\SingleProductComponent;
-use App\Livewire\CartComponent;
+use App\Livewire\guest\BrowseProductsComponent;
+use App\Livewire\guest\SingleProductComponent;
+use App\Livewire\guest\CartComponent;
 use App\Http\Controllers\CategoryController;
-use App\Livewire\AdminOverview;
+use App\Livewire\admin\AdminOverview;
 use App\Http\Controllers\SuperAdminController;
-use App\Livewire\ManageProducts;
-use App\Livewire\ShowOrders;
-use App\Livewire\ShowOrder;
+use App\Livewire\admin\ManageProducts;
+use App\Livewire\admin\ShowOrders;
+use App\Livewire\guest\ShowOrder;
 
 
 
@@ -23,10 +23,10 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified','rolemanager:customer'])->name('dashboard');
+})->middleware(['auth', 'verified', 'rolemanager:customer'])->name('dashboard');
 
 
-Route::middleware(['auth', 'verified','rolemanager:admin'])->group(function () {
+Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
 
     Route::get('/admin/dashboard', AdminOverview::class)->name('admin.dashboard');
 
@@ -37,9 +37,7 @@ Route::middleware(['auth', 'verified','rolemanager:admin'])->group(function () {
     Route::get('/admin/orders', OrderManagementComponent::class)->name('admin.orders');
 
     Route::get('/orders', ShowOrders::class)->name('orders.index');
-Route::get('/orders/{orderId}', ShowOrder::class)->name('orders.show');
-
-    
+    Route::get('/orders/{orderId}', ShowOrder::class)->name('orders.show');
 });
 
 
@@ -65,10 +63,9 @@ Route::get('/product/{id}', SingleProductComponent::class)->name('product.show')
 
 Route::get('/category/{id}', [CategoryController::class, 'index'])->name('category.show');
 
-Route::middleware(['auth', 'verified', 'rolemanager:customer'])->group(function(){
+Route::middleware(['auth', 'verified', 'rolemanager:customer'])->group(function () {
 
     Route::get('/cart', CartComponent::class)->name('cart');
-
 });
 
 
@@ -78,4 +75,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

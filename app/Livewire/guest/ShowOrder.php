@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\guest;
 
 use Livewire\Component;
 use App\Models\Order;
@@ -16,7 +16,7 @@ class ShowOrder extends Component
 
     public function render()
     {
-        return view('livewire.show-order');
+        return view('livewire.guest.order');
     }
     
     public function showOrder($orderId)

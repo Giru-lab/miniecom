@@ -1,7 +1,7 @@
 <div class="row">
   @foreach ($products as $product)
   <div class="col-lg-4">
-      <div class="product_card">
+      <div class="product_card ">
         <img src="{{ asset('storage/' . $product->image) }}" 
              alt="{{ $product->title }}" 
              class="product_img"

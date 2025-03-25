@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\admin;
 
 use App\Models\Category;
 use Livewire\Component;
@@ -39,7 +39,7 @@ class CategoryComponent extends Component
 
     public function render()
     {
-        return view('livewire.category-component', [
+        return view('livewire.admin.category', [
             'categories' => $this->categories,
         ])->layout('components.layouts.admin');
     }

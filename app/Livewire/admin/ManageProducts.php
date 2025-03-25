@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire;
+namespace App\Livewire\admin;
 
 use App\Models\Product;
 use App\Models\Category;
@@ -102,7 +102,7 @@ class ManageProducts extends Component
 
     public function render()
     {
-        return view('livewire.manage-products', [
+        return view('livewire..admin.product', [
             'products' => $this->products,
             'categories' => $this->categories,
         ])->layout('components.layouts.admin');

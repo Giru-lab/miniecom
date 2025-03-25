@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\admin;
 
 use App\Mail\OrderApprovedMail;
 use App\Models\Order;
@@ -51,7 +51,7 @@ class OrderManagementComponent extends Component
 
     public function render()
     {
-        return view('livewire.order-management-component', [
+        return view('livewire.admin.order', [
             'orders' => Order::with('product', 'user')->get()
         ])->layout('components.layouts.admin');
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\admin;
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
@@ -50,7 +50,7 @@ class AddProductComponent extends Component
 
     {
 
-        return view('livewire.add-product-component')->layout('components.layouts.admin');
+        return view('livewire.admin.product')->layout('components.layouts.admin');
 
     }
     

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\guest;
 
 use Livewire\Component;
 use App\Models\Order;
@@ -86,7 +86,7 @@ class CartComponent extends Component
 
     public function render()
     {
-        return view('livewire.cart-component', [
+        return view('livewire.guest.cart', [
             'cart' => $this->cart,
             'total' => $this->total
         ]);
