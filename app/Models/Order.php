@@ -8,15 +8,11 @@ class Order extends Model
 {
     protected $fillable = [
 
-        'product_id',
-
         'user_id',
 
         'status',
 
         'quantity',
-
-        'price_per_item',
 
         'total_price',
 
@@ -26,7 +22,7 @@ class Order extends Model
 
     {
 
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'order_product')->withPivot('quantity');
 
     }
 
@@ -38,9 +34,5 @@ class Order extends Model
 
     }
     
-    public function items()
-{
-    return $this->hasMany(OrderItem::class, 'order_id');
-}
 
 }

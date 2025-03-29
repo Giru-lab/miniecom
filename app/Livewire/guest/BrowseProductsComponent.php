@@ -31,12 +31,10 @@ class BrowseProductsComponent extends Component
         } else {
 
             $cart[$productId] = [
-
-                'title' => $product->title,
-
-                'price' => $product->price,
-
-                'quantity' => 1,
+                'id'        => $product->id,
+                'title'     => $product->title,
+                'price'     => $product->price,
+                'quantity'  => 1,
 
             ];
 
@@ -56,7 +54,7 @@ class BrowseProductsComponent extends Component
 
     {
 
-        return view('livewire.guest.product', ['products' => Product::all()]);
+        return view('livewire.guest.index', ['products' => Product::all()]);
 
     }
 

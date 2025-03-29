@@ -6,7 +6,7 @@
                 <div class="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
                     <h2 class="text-xl font-semibold mb-2">Order Confirmed!</h2>
                     <p>{{ session('message') }}</p>
-                    <button @click="show = false" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
+                    <button @click="show=false" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
                         OK
                     </button>
                 </div>
@@ -16,12 +16,15 @@
         @if (session()->has('error'))
             <p style="color: red;">{{ session('error') }}</p>
         @endif
+        @if (session()->has('alert'))
+            <p class="text-info">{{ session('alert') }} <a class="text-decoration-underline text-success" href="{{route('profile.edit')}}">Here</a></p>
+        @endif
 
         @if (empty($cart))
             <p>Your cart is empty.</p>
         @else
             <div class="col-12">
-                <div class="product_card p-3" style="border-radius: 30px; box-shadow: 10px -2px 20px rgba(0, 0, 0, 0.1);">
+                <div class="product_card p-3" style="border-radius: 10px; box-shadow: 10px -2px 20px rgba(0, 0, 0, 0.1);">
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -45,7 +48,7 @@
                                         </td>
                                         <td>${{ number_format($item['price'] * $item['quantity'], 2) }}</td>
                                         <td>
-                                            <button class="btn btn-warning" wire:click="removeFromCart({{ $productId }})">Remove</button>
+                                            <button class="btn btn-danger" wire:click="removeFromCart({{ $productId }})">Remove</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,7 +69,7 @@
         @endif
     </div>
 
-    <div class="row mt-4">
+    {{-- <div class="row mt-4">
         <div class="col-12">
             <div class="product_card p-3" style="border-radius: 30px; box-shadow: 10px -2px 20px rgba(0, 0, 0, 0.1);">
                 <h4 class="text-center">Customer Information</h4>
@@ -87,5 +90,5 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

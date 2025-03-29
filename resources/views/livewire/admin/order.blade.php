@@ -18,7 +18,7 @@
                   @foreach ($orders as $order)
                   <tr>
                       <td>
-                          <a href="#" class="text-primary" wire:click="showOrder({{ $order->id }})">
+                          <a href="{{ route('orders.show', $order->id) }}" class="text-primary">
                               {{ $order->id }}
                           </a>
                       </td>
@@ -30,8 +30,9 @@
                       <td>{{ $order->user->name }}</td>
                       <td>{{ $order->status }}</td>
                       <td>
-                          <button class="btn btn-primary" wire:click="approveOrder({{ $order->id }})">Approve</button>
-                          <button class="btn btn-danger" wire:click="cancelOrder({{ $order->id }})">Cancel</button>
+                          <a href="{{ route('orders.show', $order->id) }}" class="text-white btn btn-sm btn-success" wire:click="approveOrder({{ $order->id }})">View</a>
+                          <button class="btn btn-sm btn-primary" wire:click="approveOrder({{ $order->id }})">Approve</button>
+                          <button class="btn btn-sm btn-danger" wire:click="cancelOrder({{ $order->id }})">Cancel</button>
                       </td>
                   </tr>
                   @endforeach

@@ -23,7 +23,11 @@ class AddProductComponent extends Component
     public function saveProduct()
 
     {
-
+        if (!$this->image) {
+            session()->flash('error', 'Please upload an image.');
+            return;
+        }
+        
         $path = $this->image->store('products', 'public');
 
         Product::create([

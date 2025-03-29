@@ -1,39 +1,6 @@
 <div>
-    @if ($isEditing)
-        <div class="com_card mx-2">
-            <h3 class="com_card_title mb-3">Edit Product</h3>
-
-            <form wire:submit.prevent="updateProduct">
-                <label for="title" class="form_label">Title</label>
-                <input type="text" wire:model="title" class="form-input" />
-
-                <label for="description" class="form_label">Description</label>
-                <textarea wire:model="description" class="form-input"></textarea>
-
-                <label for="price" class="form_label">Price</label>
-                <input type="number" wire:model="price" class="form-input" />
-
-                <label for="category" class="form_label">Category</label>
-                <select wire:model="category_id" class="form-input">
-                    <option value="">Select a category</option>
-                    @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endforeach
-                </select>
-
-                <label for="image" class="form_label">Image</label>
-                <input type="file" wire:model="image" class="form-input" />
-
-                <button type="submit" class="btn-one mt-3">Update Product</button>
-                <button type="button" class="btn btn-secondary mt-3" wire:click="cancelEdit">Cancel</button>
-            </form>
-
-            @if (session()->has('message'))
-                <div class="alert alert-success mt-2">{{ session('message') }}</div>
-            @endif
-        </div>
-    @endif
-
+    
+    
     <div class="com_card mx-2">
         <h3 class="com_card_title mb-3">All Products</h3>
         <table class="table">
@@ -54,8 +21,8 @@
                     <td>{{ optional($product->category)->name }}</td>
                     <td><img src="{{ asset('storage/' . $product->image) }}" style="width: 50px; height: 50px; object-fit: cover;"></td>
                     <td>
-                        <button wire:click="editProduct({{ $product->id }})" class="btn btn-warning">Edit</button>
-                        <button wire:click="deleteProduct({{ $product->id }})" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                        <form action="{{ route('admin.edit', ['id' => $product->id]) }}"w method="get"><button class="btn btn-warning">Edit</button></form>
+                        <!-- <button wire:click="deleteProduct({{ $product->id }})" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button> -->
                     </td>
                 </tr>
                 @endforeach

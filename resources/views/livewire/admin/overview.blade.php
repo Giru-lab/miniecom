@@ -1,7 +1,9 @@
+
 <div class="mx-2">
+ 
     <div class="row">
         <div class="col-lg-4">
-          <div class="dashstat">
+          <div class="dashstat d-flex gap-3">
             <i class="fa-solid fa-cart-shopping"></i>
             <div class="dashstat_content">
               <h3>{{ $totalOrders }}</h3>
@@ -11,7 +13,7 @@
         </div>
     
         <div class="col-lg-4">
-          <div class="dashstat">
+          <div class="dashstat d-flex gap-3">
             <i class="fa-solid fa-tag"></i>
             <div class="dashstat_content">
               <h3>{{ $totalProducts }}</h3>
@@ -21,7 +23,7 @@
         </div>
     
         <div class="col-lg-4">
-          <div class="dashstat">
+          <div class="dashstat d-flex gap-3">
             <i class="fa-solid fa-list-ul"></i>
             <div class="dashstat_content">
               <h3>{{ $totalCategories }}</h3>
@@ -64,4 +66,9 @@
           </div>
         </div>
        </div>
+
+       
+       <div><canvas id="myChart"  width="100" height="25"></canvas></div>
 </div>
+
+

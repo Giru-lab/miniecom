@@ -40,33 +40,42 @@
         <div class="nav-bar">
           @php $categories = App\Models\Category::all(); @endphp
     
-          <nav class="navmenus">
-            <div class="nav-links">
-              <a href="{{ route('products.browse') }}">Home</a>
-    
-              <!-- Categories as Individual Links -->
-              @foreach ($categories as $category)
-                <a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>
-              @endforeach
-    
-              <!-- Auth Links -->
-              @auth
-                <a href="{{ route('cart') }}">Cart</a>
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                  @csrf
-                  <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="logout-link">
-                    Logout
-                  </a>
-                </form>
-              @else
-                <a href="{{ route('login') }}">Login</a>
-              @endauth
+          <nav class="navmenus d-flex justify-content-between w-100">
+            <div>
+              <div class="nav-links">
+                <a href="{{ route('products.browse') }}">Home</a>
+      
+                <!-- Categories as Individual Links -->
+                @foreach ($categories as $category)
+                  <a href="{{ route('category.show', $category->id) }}">{{ $category->name }}</a>
+                @endforeach
+      
+                <!-- Auth Links -->
+                @auth
+                  <a href="{{ route('cart') }}">Cart</a>
+                  <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                    @csrf
+                    <a href="#" onclick="event.preventDefault(); this.closest('form').submit();" class="logout-link">
+                      Logout
+                    </a>
+                  </form>
+                @else
+                  <a href="{{ route('login') }}">Login</a>
+                @endauth
+              </div>
+      
+              <!-- Mobile Menu Toggle -->
+              <div class="nav-toggler">
+                <i class="bx bx-menu-alt-right"></i>
+              </div>
             </div>
-    
-            <!-- Mobile Menu Toggle -->
-            <div class="nav-toggler">
-              <i class="bx bx-menu-alt-right"></i>
-            </div>
+
+            <a href=" {{ route('profile.edit')}}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+              </svg>
+            </a>
           </nav>
         </div>
       </div>

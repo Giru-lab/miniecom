@@ -4,7 +4,9 @@ namespace App\Livewire\guest;
 
 use Livewire\Component;
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+
 
 class CartComponent extends Component
 {
@@ -12,11 +14,6 @@ class CartComponent extends Component
     public $total = 0;
 
     public function mount()
-    {
-        $this->loadCart();
-    }
-
-    private function loadCart()
     {
         $this->cart = session()->get('cart', []);
         $this->calculateTotal();
@@ -27,7 +24,7 @@ class CartComponent extends Component
         if (isset($this->cart[$productId])) {
             unset($this->cart[$productId]);
             $this->updateSession();
-            $this->dispatch('cartUpdated'); // Livewire v3: Use dispatch instead of emit
+            $this->dispatch('cartUpdated'); 
         }
     }
 
@@ -43,34 +40,44 @@ class CartComponent extends Component
 
     public function confirmOrder()
     {
+        $user = auth()->user();
+        if ($user->address == NULL){
+            session()->flash('alert', 'Please setup first your billing address');
+            return;
+        }
+        
         if (empty($this->cart)) {
             session()->flash('error', 'Cart is empty. Add products to confirm an order.');
             return;
         }
+        
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'total_price' => $this->total,
+            'status' => 'pending',
+        ]);
+        foreach ($this->cart as $productId => $productData) {
+            
+            
+            $product = Product::find($productId);
+            if ($product) {
 
-        $orderTotal = 0;
-        foreach ($this->cart as $productId => $item) {
-            $productTotal = $item['price'] * $item['quantity'];
-            $orderTotal += $productTotal;
-
-            Order::create([
-                'product_id' => $productId,
-                'user_id' => Auth::id(),
-                'quantity' => $item['quantity'],
-                'price_per_item' => $item['price'],
-                'total_price' => $productTotal,
-                'status' => 'pending',
-            ]);
+                $order->product()->attach($product);
+            }
         }
+        
+        
+        
+
 
         // Clear the cart after confirming the order
         session()->forget('cart');
         $this->cart = [];
-        $this->total = 0;
-
-        session()->flash('message', "Order placed successfully! Your total is $orderTotal.");
+        
+        session()->flash('message', "Order placed successfully! Your total is $this->total.");
         $this->dispatch('orderConfirmed');
         $this->dispatch('cartUpdated');
+        $this->total = 0;
     }
 
     private function updateSession()
@@ -82,6 +89,7 @@ class CartComponent extends Component
     private function calculateTotal()
     {
         $this->total = array_sum(array_map(fn($item) => $item['price'] * $item['quantity'], $this->cart));
+
     }
 
     public function render()

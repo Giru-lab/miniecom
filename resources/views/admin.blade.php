@@ -4,7 +4,7 @@
             {{ __('Admin Dashboard') }}
         </h2>
     </x-slot>
-
+    
     <div class="py-10">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow-md sm:rounded-lg p-6 flex items-center justify-center">

@@ -102,7 +102,7 @@ class ManageProducts extends Component
 
     public function render()
     {
-        return view('livewire..admin.product', [
+        return view('livewire.admin.manage-products', [
             'products' => $this->products,
             'categories' => $this->categories,
         ])->layout('components.layouts.admin');

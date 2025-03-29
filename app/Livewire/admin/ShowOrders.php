@@ -17,7 +17,8 @@ class ShowOrders extends Component
 
     public function showOrder($orderId)
     {
-        $this->selectedOrder = Order::with(['items.product', 'user'])->find($orderId);
+        dd(1);
+        // $this->selectedOrder = Order::with(['items.product', 'user'])->find($orderId);
     }
 
     public function closeOrder()
