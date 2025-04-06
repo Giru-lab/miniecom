@@ -50,30 +50,11 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="#hero" class="active">Home</a></li>
-          <li><a href="#about">About</a></li>
           <li><a href="#features">Features</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li><a href="#pricing">Pricing</a></li>
           <li><a href="#faq">F.A.Q</a></li>
-          <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="#">Dropdown 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-                <ul>
-                  <li><a href="#">Deep Dropdown 1</a></li>
-                  <li><a href="#">Deep Dropdown 2</a></li>
-                  <li><a href="#">Deep Dropdown 3</a></li>
-                  <li><a href="#">Deep Dropdown 4</a></li>
-                  <li><a href="#">Deep Dropdown 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown 2</a></li>
-              <li><a href="#">Dropdown 3</a></li>
-              <li><a href="#">Dropdown 4</a></li>
-            </ul>
-          </li>
           <li><a href="#contact">Contact</a></li>
-        </ul>
+            <ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
@@ -85,15 +66,15 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="hero" class="hero section">
+    <section id="hero" class="hero section" style="background-size: cover; background-position: bottom; background-image: url({{ asset('res/img/background.webp') }});">
 
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 order-lg-last hero-img" data-aos="zoom-out" data-aos-delay="100">
-            <img src="{{ asset('res/img/hero-img.png') }}" class="img-fluid animated" alt="">
+            <img src="{{ asset('res/img/hero-imgs.png') }}" class="img-fluid animated" alt="">
           </div>
           <div class="col-lg-6  d-flex flex-column justify-content-center text-center text-md-start" data-aos="fade-in">
-            <h2>App landing page template</h2>
+            <h2 class="text-black">Get up to 20% off on your first purchase! Register now to claim your discount voucher!</h2>
             <p>We are team of talented designers making websites with Bootstrap</p>
             <div class="d-flex mt-4 justify-content-center justify-content-md-start">
               <a href="#" class="download-btn"><i class="bi bi-google-play"></i> <span>Google Play</span></a>
@@ -110,36 +91,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>About</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <ul>
-              <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-            <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section><!-- /About Section -->
 
     <!-- Features Section -->
     <section id="features" class="features section">
@@ -155,7 +108,7 @@
         <div class="row gy-5">
 
           <div class="col-xl-5 d-flex align-items-center" data-aos="fade-up" data-aos-delay="100">
-            <img src="{{ asset('res/img/features.svg') }}" class="img-fluid" alt="">
+            <img src="{{ asset('res/img/dog-playing.png') }}" class="img-fluid" alt="">
           </div>
 
           <div class="col-xl-7 d-flex" data-aos="fade-up" data-aos-delay="200">
@@ -220,7 +173,52 @@
 
     </section><!-- /Features Section -->
 
-    <!-- Feature Details Section -->
+    <!-- PRODUCT Section -->
+    
+    <section id="product" class="gallery section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+
+
+          <h2>Products </h2>
+          <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100"
+          >
+
+
+          <div style="display: flex; gap: 20px;">
+              <div>
+                  <img src="{{ asset('res/img/app-gallery/app-gallery-1.png') }}" class="img-fluid"
+                      alt="">
+              </div>
+              <div>
+                  <img src="{{ asset('res/img/app-gallery/app-gallery-2.png') }}" class="img-fluid"
+                      alt="">
+              </div>
+              <div>
+                  <img src="{{ asset('res/img/app-gallery/app-gallery-3.png') }}" class="img-fluid"
+                      alt="">
+              </div>
+              <div><img src="{{ asset('res/img/app-gallery/app-gallery-4.png') }}" class="img-fluid"
+                      alt=""></div>
+          </div>
+
+          <div style="padding: 20px; display: grid; place-content: center;">
+              <a href="{{route('products.browse')}}" style="background-color: #5271FF; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; transition: background-color 0.3s ease;">
+                  Browse all
+              </a>
+                
+          </div>
+
+
+          <div class="swiper-pagination"></div>
+
+      </div>
+
+  </section>
     
     <!-- Gallery Section -->
     <section id="gallery" class="gallery section">
@@ -228,7 +226,7 @@
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Gallery</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h3>this is the product that can be bought on Tiktok</h3>
       </div><!-- End Section Title -->
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
@@ -269,18 +267,18 @@
             }
           </script>
           <div class="swiper-wrapper align-items-center">
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-1.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-1.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-2.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-2.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-3.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-3.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-4.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-4.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-5.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-5.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-6.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-6.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-7.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-7.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-8.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-8.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-9.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-9.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-10.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-10.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-11.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-11.png') }}" class="img-fluid" alt=""></a></div>
-            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/app-gallery-12.png') }}"><img src="{{ asset('res/img/app-gallery/app-gallery-12.png') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/1.jpg') }}"><img src="{{ asset('res/img/app-gallery/1.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/2.jpg') }}"><img src="{{ asset('res/img/app-gallery/2.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/3.jpg') }}"><img src="{{ asset('res/img/app-gallery/3.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/4.jpg') }}"><img src="{{ asset('res/img/app-gallery/4.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/5.jpg') }}"><img src="{{ asset('res/img/app-gallery/5.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/6.jpg') }}"><img src="{{ asset('res/img/app-gallery/6.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/7.jpg') }}"><img src="{{ asset('res/img/app-gallery/7.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/8.jpg') }}"><img src="{{ asset('res/img/app-gallery/8.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/9.jpg') }}"><img src="{{ asset('res/img/app-gallery/9.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/3.jpg') }}"><img src="{{ asset('res/img/app-gallery/3.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/6.jpg') }}"><img src="{{ asset('res/img/app-gallery/6.jpg') }}" class="img-fluid" alt=""></a></div>
+            <div class="swiper-slide"><a class="glightbox" data-gallery="images-gallery-full" href="{{ asset('res/img/app-gallery/4.jpg') }}"><img src="{{ asset('res/img/app-gallery/4.jpg') }}" class="img-fluid" alt=""></a></div>
           </div>
           <div class="swiper-pagination"></div>
         </div>
@@ -425,10 +423,6 @@
       </div>
 
     </section><!-- /Testimonials Section -->
-
-    <!-- Pricing Section -->
-    
-
     <!-- Faq Section -->
     <section id="faq" class="faq section light-background">
 

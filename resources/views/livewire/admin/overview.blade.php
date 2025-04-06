@@ -68,7 +68,8 @@
        </div>
 
        
-       <div><canvas id="myChart"  width="100" height="25"></canvas></div>
+       <div >
+        <canvas id="myChart"  width="100" height="25"></canvas></div>
 </div>
 
 
