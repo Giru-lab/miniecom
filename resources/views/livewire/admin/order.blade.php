@@ -2,14 +2,19 @@
   <div class="com_card mx-2">
       <h3 class="com_card_title mb-3">All Orders</h3>
 
+    <div class="d-flex gap-2 w-fit pb-2 text-white" >
+        <div class="p-3 rounded-5 bg-success cursor-pointer" style="cursor: pointer;" wire:click="changeStatus(0)">Approved</div>
+        <div class="p-3 rounded-5 bg-danger cursor-pointer" style="cursor: pointer;" wire:click="changeStatus(1)">Not approved</div>
+    </div>
       <div class="table-responsive">
+
           <table class="data-table">
               <thead>
                   <tr>
                       <th>Order ID</th>
-                      <th>Tracking</th>
                       <th>Customer Name</th>
                       <th>Status</th>
+                      <th>Total price</th>
                       <th>Action</th>
                   </tr>
               </thead>
@@ -22,13 +27,15 @@
                               {{ $order->id }}
                           </a>
                       </td>
-                      <td>
-                          <a href="#" class="text-primary" wire:click="showOrder({{ $order->id }})">
-                              {{ $order->tracking_id }}
-                          </a>
-                      </td>
                       <td>{{ $order->user->name }}</td>
                       <td>{{ $order->status }}</td>
+                      
+                      <td>
+                          <a href="#" class="text-primary">
+                              {{ $order->total_price }}
+                          </a>
+                      </td>
+
                       <td>
                           <a href="{{ route('orders.show', $order->id) }}" class="text-white btn btn-sm btn-success" wire:click="approveOrder({{ $order->id }})">View</a>
                           <button class="btn btn-sm btn-primary" wire:click="approveOrder({{ $order->id }})">Approve</button>
@@ -41,7 +48,7 @@
       </div>
   </div>
 
-  {{-- Order Details Modal --}}
+  {{-- Order Details Modal
   @if($selectedOrder)
   <div class="modal show d-block" style="background: rgba(0,0,0,0.5)">
       <div class="modal-dialog">
@@ -63,5 +70,5 @@
           </div>
       </div>
   </div>
-  @endif
+  @endif --}}
 </div>

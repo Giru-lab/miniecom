@@ -11,9 +11,8 @@
                 <p class="pcc_in">In <a href="{{route('category.show', $product->category->id)}}">{{ $product->category->name }}</a></p>
                 <p class="pcc_price">${{ $product->price }}</p>
       
-                <div class="pcc_btns">
-                  <button wire:click="addToCart({{ $product->id }})" class="addtocart">Add To Cart</button>
-                  <a href="{{ route('product.show', $product->id) }}" class="viewbtn">View Details</a>
+                <div class="pcc_btns" >
+                  <a href="{{ route('product.show', $product->id) }}" class="viewbtn w-100 text-center">View Details</a>
                 </div>
                 
               </div>

@@ -8,6 +8,7 @@ use App\Models\Product;
 class SingleProductComponent extends Component
 {
     public $product;
+    public $quantity = 1;
 
     /**
 
@@ -53,7 +54,7 @@ class SingleProductComponent extends Component
 
                 'price' => $product->price,
 
-                'quantity' => 1,
+                'quantity' => $this->quantity,
 
             ];
 
@@ -66,7 +67,9 @@ class SingleProductComponent extends Component
         session()->flash('message', "{$product->title} added to cart.");
 
     }
-
+    public function setQuantity($value){
+        $this->quantity += $value;
+    }
     public function render()
 
     {

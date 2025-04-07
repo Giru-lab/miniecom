@@ -181,6 +181,9 @@
     <!-- Internal JS Linking -->
     <script src="{{ asset('theme_asset/dash/js/dash.js') }}"></script>
     @livewireScripts
+
+    @stack('scripts')
+
 </body>
 
 </html>

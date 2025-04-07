@@ -15,10 +15,11 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
-            $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->decimal('total_price', 10, 2); // 
             $table->integer('quantity')->default(1);
+            $table->timestamps();
         });
     }
 

@@ -10,10 +10,11 @@ use Livewire\Component;
 class OrderManagementComponent extends Component
 {
     public $selectedOrder = null;
+    public $status = 'approved';
 
     public function showOrder($orderId)
     {
-        $this->selectedOrder = Order::with(['user', 'product'])->find($orderId);
+        $this->selectedOrder = Order::with(['user'])->find($orderId);
     }
 
     public function closeOrder()
@@ -23,12 +24,13 @@ class OrderManagementComponent extends Component
 
     public function approveOrder($orderId)
     {
-        $order = Order::with(['user', 'product'])->find($orderId);
+        $order = Order::with(['user'])->find($orderId);
 
         if ($order) {
             $order->update(['status' => 'approved']);
+            
+            
 
-            // Send the email
             Mail::to($order->user->email)->send(new OrderApprovedMail($order));
 
             session()->flash('message', "Order #{$order->id} approved successfully, and the user has been notified.");
@@ -49,10 +51,18 @@ class OrderManagementComponent extends Component
         }
     }
 
+    public function changeStatus($value){
+        if($value == 1){
+            $this->status = 'approved';
+        }else
+            $this->status = 'cancelled';
+
+    }
+
     public function render()
     {
         return view('livewire.admin.order', [
-            'orders' => Order::with('product', 'user')->get()
+            'orders' => Order::with('user')->where('status', $this->status)->get()
         ])->layout('components.layouts.admin');
     }
 }

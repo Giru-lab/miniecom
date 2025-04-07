@@ -46,12 +46,6 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
 });
 
 
-
-
-
-
-
-
 Route::get('/hidden-admin-register', [SuperAdminController::class, 'showRegistrationForm'])
     ->name('superadmin.register.form')
     ->middleware('checkSuperAdmin');

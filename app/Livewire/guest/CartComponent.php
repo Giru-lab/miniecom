@@ -57,14 +57,18 @@ class CartComponent extends Component
             'status' => 'pending',
         ]);
         foreach ($this->cart as $productId => $productData) {
-            
-            
             $product = Product::find($productId);
+        
             if ($product) {
-
-                $order->product()->attach($product);
+                $totalPrice = $productData['price'] * $productData['quantity'];
+                
+                $order->product()->attach($product, [
+                    'quantity' => $productData['quantity'],
+                    'total_price' => $totalPrice
+                ]);
             }
         }
+        
         
         
         

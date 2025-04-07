@@ -26,11 +26,21 @@
 
         <li><strong>Order ID:</strong> {{ $order->id }}</li>
 
-        <li><strong>Product:</strong> {{ $order->product->title }}</li>
-
         <li><strong>Quantity:</strong> {{ $order->quantity }}</li>
 
         <li><strong>Total Price:</strong> ${{ number_format($order->total_price, 2) }}</li>
+
+        <p><strong>Order Details:</strong></p>
+
+        <ul>
+            @foreach ($order->product as $product)
+                <h4><strong>Product Name</strong>: {{ $product->title }}</h4>
+                <li><strong>Price</strong>: {{ $product->price }}</li>
+                <li><strong>Quantity</strong>: {{ $product->pivot->quantity }}</li>
+                <li><strong>Total</strong>: {{ $product->pivot->total_price }}</li>
+            @endforeach
+        </ul>
+        
 
     </ul>
 
