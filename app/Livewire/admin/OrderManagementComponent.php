@@ -57,6 +57,9 @@ class OrderManagementComponent extends Component
         }else
             $this->status = 'cancelled';
 
+        $this->dispatch('contentChanged');
+
+
     }
 
     public function render()
