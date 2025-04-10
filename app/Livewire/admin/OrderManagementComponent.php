@@ -52,10 +52,10 @@ class OrderManagementComponent extends Component
     }
 
     public function changeStatus($value){
-        if($value == 1){
+        if($value == 0){
             $this->status = 'approved';
         }else
-            $this->status = 'cancelled';
+            $this->status = 'pending';
 
         $this->dispatch('contentChanged');
 

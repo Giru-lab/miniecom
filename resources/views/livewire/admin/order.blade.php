@@ -4,8 +4,8 @@
 
     <div class="d-flex justify-content-between align-items-center gap-2 text-white" >
         <div class="d-flex gap-2">
-            <div class="p-3 rounded-5 bg-success cursor-pointer" style="cursor: pointer;" wire:click="changeStatus(1)">Approved</div>
-            <div class="p-3 rounded-5 bg-danger cursor-pointer" style="cursor: pointer;" wire:click="changeStatus(0)">Pending</div>
+            <div class="p-3 rounded-5 bg-success cursor-pointer" style="cursor: pointer;" wire:click="changeStatus(0)">Approved</div>
+            <div class="p-3 rounded-5 bg-danger cursor-pointer" style="cursor: pointer;" wire:click="changeStatus(1)">Pending</div>
         </div>
         <div id="custom-buttons" class="d-flex gap-2 mb-3 justify-content-center mt-4"></div>
     </div>
@@ -40,10 +40,22 @@
                       </td>
 
                       <td class="text-center p-3">
-                          <a href="{{ route('orders.show', $order->id) }}" class="text-white btn btn-sm btn-success" wire:click="approveOrder({{ $order->id }})">View</a>
-                          <button class="btn btn-sm btn-primary" wire:click="approveOrder({{ $order->id }})">Approve</button>
-                          <button class="btn btn-sm btn-danger" wire:click="cancelOrder({{ $order->id }})">Cancel</button>
-                      </td>
+                        <a href="{{ route('orders.show', $order->id) }}" class="text-white btn btn-sm btn-success" wire:click="approveOrder({{ $order->id }})">View</a>
+                        <button class="btn btn-sm btn-primary" wire:click="approveOrder({{ $order->id }})">Approve</button>
+                        <button class="btn btn-sm btn-danger" onclick="confirmCancel({{ $order->id }})">Cancel</button>
+                    </td>
+                    
+                    <script>
+                        function confirmCancel(orderId) {
+                            // Show a confirmation dialog
+                            const isConfirmed = confirm("Are you sure you want to cancel this order?");
+                            if (isConfirmed) {
+                                // If confirmed, trigger the cancelOrder method with the order ID
+                                @this.call('cancelOrder', orderId);
+                            }
+                        }
+                    </script>
+                    
                   </tr>
                   @endforeach
               </tbody>

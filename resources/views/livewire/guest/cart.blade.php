@@ -1,17 +1,48 @@
 <div>
     <div class="row">
         @if (session()->has('message'))
-            <div x-data="{ show: true }" x-show="show" x-transition.opacity.duration.300ms
-                class="motion-preset-pop fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                <div class="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-                    <h2 class="text-xl font-semibold mb-2">Order Confirmed!</h2>
-                    <p>{{ session('message') }}</p>
-                    <button @click="show=false" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md">
+            <div x-data="{ show: true }" x-show="show" x-transition:enter="transition ease-out duration-300 transform"
+                x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-200 transform"
+                x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
+                <div class="bg-white p-8 rounded-lg shadow-2xl w-96 text-center transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl font-semibold text-gradient mb-4">Order Confirmed!</h2>
+                    <p class="text-lg text-gray-600 mb-6">{{ session('message') }}</p>
+                    <button @click="show=false" class="mt-6 bg-blue-600 text-white hover:bg-blue-700 px-12 py-8 rounded-md text-xl font-semibold shadow-lg transform transition-all duration-300 hover:scale-110">
                         OK
                     </button>
                 </div>
             </div>
         @endif
+    </div>
+    
+    <style>
+        /* Gradient text effect */
+        .text-gradient {
+            background: linear-gradient(45deg, #6EE7B7, #3B82F6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+    
+        /* Shadow on the modal */
+        .shadow-2xl {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+    
+        /* Smooth scaling effect on hover */
+        .transform {
+            transform: scale(1);
+        }
+    
+        .transform:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    
+    
+    
 
         @if (session()->has('error'))
             <p style="color: red;">{{ session('error') }}</p>
@@ -21,7 +52,15 @@
         @endif
 
         @if (empty($cart))
-            <p>Your cart is empty.</p>
+        <p class="h4-style">Your cart is empty.</p>
+
+        <style>
+          .h4-style {
+            font-size: 1.5rem; /* Size of h4 */
+            font-weight: bold; /* h4 typically has a bold weight */
+          }
+        </style>
+        
         @else
             <div class="col-12">
                 <div class="product_card p-3" style="border-radius: 10px; box-shadow: 10px -2px 20px rgba(0, 0, 0, 0.1);">
@@ -48,8 +87,21 @@
                                         </td>
                                         <td>${{ number_format($item['price'] * $item['quantity'], 2) }}</td>
                                         <td>
-                                            <button class="btn btn-danger" wire:click="removeFromCart({{ $productId }})">Remove</button>
+                                            <button class="btn btn-danger" onclick="confirmRemove({{ $productId }})" style="font-size: 16px;">Remove</button>
                                         </td>
+                                        
+                                        
+                                        <script>
+                                            function confirmRemove(productId) {
+                                                // Show a confirmation dialog
+                                                const isConfirmed = confirm("Are you sure you want to remove this item from your cart?");
+                                                if (isConfirmed) {
+                                                    // If confirmed, trigger the removeFromCart method with the product ID
+                                                    @this.call('removeFromCart', productId);
+                                                }
+                                            }
+                                        </script>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -59,7 +111,7 @@
                                     <td></td>
                                     <td></td>
                                     <td>${{ number_format($total, 2) }}</td>
-                                    <td><button wire:click="confirmOrder" class="btn btn-primary">Confirm Order</button></td>
+                                    <td><button wire:click="confirmOrder" class="btn btn-primary" style="font-size: 16px;" >Confirm Order</button></td>
                                 </tr>
                             </tfoot>
                         </table>
