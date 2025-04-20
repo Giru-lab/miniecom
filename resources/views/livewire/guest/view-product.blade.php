@@ -13,7 +13,7 @@
                     </div>
 
                     <div class="col-lg-8">
-                        <div class="pc_content">
+                        <div class="pc_content" style="font-size: 15px">
                             @if (!empty($product))
                                 <h2>{{ $product->title }}</h2>
                                 <p class="pcc_in">In
@@ -24,17 +24,23 @@
                                         <span>No Category</span>
                                     @endif
                                 </p>
+                                <p>Available Stocks: {{ $product->stock }}</p>
                                 <p class="pcc_price">${{ $product->price }}</p>
                                 <p class="pcc_description">{{ $product->description }}</p>
-                                <div class="d-flex flex-column gap-3"  style="width: fit-content">
+                                <div class="d-flex flex-column gap-3" style="width: fit-content">
                                     @include('livewire.guest.modal.view-product-quantity')
-    
+
                                     <div class="pcc_btns">
-                                        <button wire:click="addToCart({{ $product->id }})" type="button" class="addtocart">Add To Cart</button>
+                                        <button wire:click="addToCart({{ $product->id }})" type="button"
+                                            class="addtocart">Add To Cart</button>
                                     </div>
-                                    
+
 
                                 </div>
+
+                                @if (session()->has('error'))
+                                    <div class="alert alert-danger my-2">{{ session('error') }}</div>
+                                @endif
 
                                 @if (session()->has('message'))
                                     <div class="alert alert-success my-2">{{ session('message') }}</div>

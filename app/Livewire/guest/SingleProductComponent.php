@@ -27,8 +27,12 @@ class SingleProductComponent extends Component
     public function addToCart($productId)
 
     {
-
+        
         $product = Product::find($productId);
+        if($this->quantity > $product->stock){
+            session()->flash('error', "The available stock is only {$product->stock}");
+            return;
+        }
 
         if (!$product) {
 
@@ -42,10 +46,11 @@ class SingleProductComponent extends Component
 
         $cart = session()->get('cart', []);
 
+        
         if (isset($cart[$productId])) {
-
+            
             $cart[$productId]['quantity']++;
-
+            
         } else {
 
             $cart[$productId] = [

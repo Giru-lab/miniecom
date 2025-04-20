@@ -6,11 +6,11 @@
                 x-transition:leave="transition ease-in duration-200 transform"
                 x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                 class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
-                <div class="bg-white p-8 rounded-lg shadow-2xl w-96 text-center transform transition-all duration-500 hover:scale-105">
-                    <h2 class="text-3xl font-semibold text-gradient mb-4">Order Confirmed!</h2>
+                <div class="bg-white rounded-lg shadow-2xl w-96 text-center transform transition-all duration-500 hover:scale-105">
+                    <h2 class="text-3xl font-semibold text-gradient mb-4 pt-5">Order Confirmed!</h2>
                     <p class="text-lg text-gray-600 mb-6">{{ session('message') }}</p>
-                    <button @click="show=false" class="mt-6 bg-blue-600 text-white hover:bg-blue-700 px-12 py-8 rounded-md text-xl font-semibold shadow-lg transform transition-all duration-300 hover:scale-110">
-                        OK
+                    <button @click="show=false" class="btn btn-primary mb-5" style="font-size: 1.5rem">
+                        Accept and Back
                     </button>
                 </div>
             </div>
@@ -45,7 +45,7 @@
     
 
         @if (session()->has('error'))
-            <p style="color: red;">{{ session('error') }}</p>
+            <p class="alert alert-danger">{{ session('error') }}</p>
         @endif
         @if (session()->has('alert'))
             <p class="text-info">{{ session('alert') }} <a class="text-decoration-underline text-success" href="{{route('profile.edit')}}">Here</a></p>

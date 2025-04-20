@@ -50,6 +50,20 @@ class CartComponent extends Component
             session()->flash('error', 'Cart is empty. Add products to confirm an order.');
             return;
         }
+
+        foreach ($this->cart as $productId => $productData) {
+            $product = Product::find($productId);
+            
+            if (!$product) {
+                session()->flash('error', "Product with ID {$productId} not found.");
+                return;
+            }
+    
+            if ($product->stock < $productData['quantity']) {
+                session()->flash('error', "Not enough stock for {$product->title}. Only {$product->stock} left.");
+                return;
+            }
+        }
         
         $order = Order::create([
             'user_id' => Auth::id(),
@@ -66,6 +80,9 @@ class CartComponent extends Component
                     'quantity' => $productData['quantity'],
                     'total_price' => $totalPrice
                 ]);
+                
+                $product->stock -= $productData['quantity'];
+                $product->save();
             }
         }
         

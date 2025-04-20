@@ -9,7 +9,8 @@ use Livewire\WithFileUploads;
 class EditProduct extends Component
 {
     use WithFileUploads;
-    public $productId, $title, $category_id, $description, $price, $images;
+    public $productId, $title, $category_id, $description, $price, $images, $stocks;
+    public $updateStock = 1;
     public $current_image;
     public $categories;
 
@@ -27,6 +28,7 @@ class EditProduct extends Component
         $this->category_id = $product->category_id;
         $this->description = $product->description;
         $this->price = $product->price;
+        $this->stocks = $product->stock;
         $this->current_image = $product->image;
     }
 
@@ -53,6 +55,35 @@ class EditProduct extends Component
         session()->flash('message', 'Product updated successfully!');
 
     }
+
+    public function updateStocks()
+    {
+        $this->validate();
+
+        $product = Product::findOrFail($this->productId);
+
+        $product->update([
+            'stock' => $this->stocks + $this->updateStock, 
+        ]);
+
+        $this->stocks = $product->stock;
+        
+        session()->flash('stock', 'Stock updated successfully!');
+    }
+
+     public function increaseQty()
+     {
+         $this->updateStock += 1;
+     }
+ 
+     public function decreaseQty()
+     {
+         if ($this->updateStock > 1) {
+             $this->updateStock -= 1;
+         }
+     }
+
+
     public function render()
     {
           return view('livewire.admin.edit-product', [
